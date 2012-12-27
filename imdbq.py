@@ -16,7 +16,7 @@ def search_by_title(title):
 
 def main():
     parser = argparse.ArgumentParser(description='IMDBq')
-    parser.add_argument('-t','--title',help = 'Exact title of the movie',dest = "title")
+    parser.add_argument('-t','--title',help = 'Title of the movie to search for',dest = "title")
     args = parser.parse_args()
 
     if args.title:

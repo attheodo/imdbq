@@ -9,7 +9,7 @@ Get the module via
 
 ## Usage
 ```
-usage: imdbq.py [-h] [-t TITLE]
+usage: imdbq.py [-h] [-t TITLE] [-r]
 
 IMDBq
 
@@ -17,4 +17,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -t TITLE, --title TITLE
                         Title of the movie to search for
+  -r, --rating          Display only the movie rating of the first result
+                        returned
 ```

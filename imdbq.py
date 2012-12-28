@@ -5,14 +5,20 @@ import argparse
 API_ENDPOINT = 'http://imdbapi.org/'
 
 def search_by_title(title):
-    print "\n[-] Querying for \"%s\"\n" % title
 
-    get_params = {'title': title,'type': 'json', 'plot': 'simple', 'limit': 5 ,'yg': 0,'lang': 'en-US', 'mt': 'none', 'release': 'simple'}
+    movies = imdbquery(title)
+    for movie in movies:
+        print "\t- %s (%s) - %s - Rating: %s\n\t\t%s\n" % (movie['title'], movie['year'], ', '.join(movie['genres']),\
+                                                           movie['rating'],movie.get('plot_simple',None))
+
+def imdbquery(title, type='json',yg = 0, mt = 'none', plot = 'simple',limit = 5,lang = 'en-US',aka = 'simple',release = 'simple'):
+
+    get_params = {'title': title,'type': type, 'plot': plot, 'limit': limit ,'yg': yg,'lang': lang, 'mt': mt, 'release': release, 'aka': aka}
     r = requests.get(API_ENDPOINT,params=get_params)
     response = r.json()
 
-    for movie in response:
-       print "\t- %s (%s) - %s\n\t\tRating: %s\n\t\t%s\n" % (movie['title'], movie['year'], ', '.join(movie['genres']), movie['rating'],movie.get('plot_simple',None))
+    return response
+
 
 def main():
     parser = argparse.ArgumentParser(description='IMDBq')
